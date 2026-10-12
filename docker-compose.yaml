@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: amish
+      POSTGRES_PASSWORD: amishreadyteamai
+      POSTGRES_DB: readydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  company-service:
+    build: ./CompanyService
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./CompanyService/.env
+
+  user-service:
+    build: ./UserService
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./UserService/.env
+  
+
+volumes:
+  postgres_data:

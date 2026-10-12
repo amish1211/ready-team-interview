@@ -48,7 +48,7 @@ curl http://localhost:5000/users/1
 ```bash
 curl -X POST http://localhost:3000/companies \
   -H "Content-Type: application/json" \
-  -d '{"name": "Acme Corp", "address_line": "12 MG Road, Bengaluru, Karnataka 560001"}'
+  -d '{"name": "Acme Corp", "address": "12 MG Road, Bengaluru, Karnataka 560001"}'
 ```
 
 **List companies** — `GET /companies`

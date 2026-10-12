@@ -1,5 +1,7 @@
 const express = require('express');
 const { GetAllCompanies, GetAllCompaniesById, CreateCompany } = require('./Controllers/CompaniesController');
+const { validate } = require('./Middlewares/validate');
+const { createCompanySchema, companyIdParamsSchema } = require('./Schemas/companySchema');
 const app = express();
 const port = 3000;
 
@@ -11,8 +13,8 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/companies',GetAllCompanies);
-app.get('/companies/:id',GetAllCompaniesById);
-app.post('/companies', CreateCompany);
+app.get('/companies/:id',validate('params',companyIdParamsSchema),GetAllCompaniesById);
+app.post('/companies', validate('body',createCompanySchema), CreateCompany);
 
 
 app.use((req, res, next) => {
